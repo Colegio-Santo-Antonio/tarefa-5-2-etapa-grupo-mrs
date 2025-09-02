@@ -1,25 +1,28 @@
-def luhn_check(card_number: str) -> bool:
-    digits = [int(d) for d in card_number]
-    soma = 0
+cartao = input().strip()
+digitos = [int(d) for d in cartao]
 
-    
-    for i, d in enumerate(reversed(digits)):
-        if i % 2 == 0:
-            # posição ímpar (da direita)
-            soma += d
-        else:
-            dobro = d * 2
-            if dobro > 9:
-                
-                dobro -= 9
-            soma += dobro
-
-    return soma % 10 == 0
+soma_impares = 0
+soma_pares = 0
 
 
-if __name__ == "__main__":
-    card = input().strip()
-    if luhn_check(card):
-        print("Cartão válido")
+for i in range(len(digitos)):
+    posicao = len(digitos) - i 
+    valor = digitos[i]
+
+    if posicao % 2 == 1:  
+       
+        soma_impares += valor
     else:
-        print("Cartão inválido")
+       
+        dobro = valor * 2
+        if dobro < 10:
+            soma_pares += dobro
+        else:
+            soma_pares += (dobro // 10) + (dobro % 10)  # soma dígitos do dobro
+
+soma_total = soma_impares + soma_pares
+
+if soma_total % 10 == 0:
+    print("Cartão válido")
+else:
+    print("Cartão inválido")
