@@ -5,7 +5,7 @@ def luhn_check(card_number: str) -> bool:
     
     for i, d in enumerate(reversed(digits)):
         if i % 2 == 0:
-            
+            # posição ímpar (da direita)
             soma += d
         else:
             dobro = d * 2
